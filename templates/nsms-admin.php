@@ -8,6 +8,9 @@
     if(isset($_POST['Enregistrer'])){
         $service_id = $_POST['service_id'];
         $secret_token = $_POST['secret_token'];
+        /**
+         * Control des champs
+         */
         ConfigService::save(new Config($service_id, $secret_token));        
     }
 ?>

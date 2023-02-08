@@ -52,7 +52,7 @@
 
     <div class="row">
         <div class="col-12 mt-2">
-            <h5 class="__page-title">Enregistrer un document</h5>
+            <h5 class="__page-title">Envoyer un message</h5>
             <a href="<?= admin_url('admin.php?page=documents'); ?>" class="__btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -67,41 +67,23 @@
 		<div class="col-12 mt-2">
 			<div class="panel panel-primary">
 	            <div class="panel-body">
-	                <form action="#" method="POST" enctype="multipart/form-data">
+	                <form action="#" method="POST">
 						<div class="row">
 							<div class="col-6">
-                                <!-- <div class="form-group">
-                                    <label>Categories</label>
-                                    <select style="min-width: 100%" name="categorie" class="form-control">
-                                        <option selected disabled>Selectionnez une categorie</option>
-                                        <?php foreach($categories as $key => $categorie): ?>
-                                            <option value="<?= $key ?>"><?= $categorie ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div> -->
 								<div class="form-group">
-									<label>Titre</label>
-									<input type="text" name="titre" class="form-control">
+									<label>Contact</label>
+									<input type="text" name="contact" class="form-control">
 								</div>
                                 <div class="form-group">
-									<label>Auteur</label>
-									<input type="text" name="auteur" class="form-control">
-								</div>
-							</div>
-                            <div class="col-6">
-                                <div class="form-group">
-									<label>Nombre de page</label>
-									<input type="text" name="nombre_page" class="form-control">
-								</div>
-                                <div class="form-group">
-									<label>Editeur</label>
-									<input type="text" name="editeur" class="form-control">
-								</div>
-                            </div>
+									<label>Message</label>
+									<!-- <textarea class="form-control"><textarea> -->
+                                    <textarea name="message" id="message" rows="5" cols="60" ></textarea>
 
-                            <div class="form-group mt-2">
-                                <button type="submit" name="btn_submit" class="__btn">Enregistrer</button>
-                            </div>
+								</div>
+                                <div class="form-group mt-2">
+                                    <button type="submit" name="btn_submit" class="__btn">Enregistrer</button>
+                                </div>
+							</div>
 						</div>
 					</form>                
 	            </div>
@@ -109,12 +91,3 @@
 		</div>
 	</div>
 </div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        
-       
-    });
-</script>
