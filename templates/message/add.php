@@ -3,15 +3,23 @@
     use App\Models\Message;
     use App\Services\MessageService;
 
+    $errorMessage = ""; 
+    $successMessage = "";
+
     if(isset($_POST['btn_envoyer_sms'])){
 
-        $destinataire = $_POST['destinataire'];
-        $message = $_POST['message'];
-        /**
-         * Control des champs
-         */
-        $newMessage = new Message([$destinataire], $message);
-        MessageService::send($newMessage); 
+        try {
+            $destinataire = $_POST['destinataire'];
+            $message = $_POST['message'];
+            /**
+             * Control des champs
+             */
+            $newMessage = new Message([$destinataire], $message);
+            $successMessage = MessageService::send($newMessage); 
+
+        } catch (Exception $ex) {
+            $errorMessage = $ex->getMessage();
+        }
     }
     
 
@@ -80,6 +88,15 @@
 		<div class="col-12 mt-2">
 			<div class="panel panel-primary">
 	            <div class="panel-body">
+
+                    <?php if($successMessage): ?>
+                        <p><span class="text-success"><?= $successMessage ?></span></p>
+                    <?php endif; ?>
+
+                    <?php if($errorMessage): ?>
+                        <p><span class="text-danger"><?= $errorMessage ?></span></p>
+                    <?php endif; ?>
+
 	                <form action="#" method="POST">
 						<div class="row">
 							<div class="col-6">

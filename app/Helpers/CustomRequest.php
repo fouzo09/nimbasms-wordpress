@@ -28,9 +28,10 @@ class CustomRequest{
         curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
 
         $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        return $response;
+        return ["code"=> $httpcode, "content"=>$response];
     }
 
 
