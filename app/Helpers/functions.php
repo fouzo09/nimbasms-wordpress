@@ -20,3 +20,9 @@ if(! function_exists('get_file_content')){
         return $result;
     }
 }
+
+if(! function_exists('dd')){
+    function dd($message){
+        var_dump($message); die();
+    }
+}

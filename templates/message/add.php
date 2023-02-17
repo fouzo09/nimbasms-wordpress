@@ -1,5 +1,18 @@
-<?php 
-	
+<?php
+
+    use App\Models\Message;
+    use App\Services\MessageService;
+
+    if(isset($_POST['btn_envoyer_sms'])){
+
+        $destinataire = $_POST['destinataire'];
+        $message = $_POST['message'];
+        /**
+         * Control des champs
+         */
+        $newMessage = new Message([$destinataire], $message);
+        MessageService::send($newMessage); 
+    }
     
 
 ?>
@@ -53,7 +66,7 @@
     <div class="row">
         <div class="col-12 mt-2">
             <h5 class="__page-title">Envoyer un message</h5>
-            <a href="<?= admin_url('admin.php?page=documents'); ?>" class="__btn">
+            <a href="<?= admin_url('admin.php?page=message'); ?>" class="__btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -72,7 +85,7 @@
 							<div class="col-6">
 								<div class="form-group">
 									<label>Contact</label>
-									<input type="text" name="contact" class="form-control">
+									<input type="text" name="destinataire" class="form-control">
 								</div>
                                 <div class="form-group">
 									<label>Message</label>
@@ -81,7 +94,7 @@
 
 								</div>
                                 <div class="form-group mt-2">
-                                    <button type="submit" name="btn_submit" class="__btn">Enregistrer</button>
+                                    <button type="submit" name="btn_envoyer_sms" class="__btn">Enregistrer</button>
                                 </div>
 							</div>
 						</div>

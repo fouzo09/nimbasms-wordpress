@@ -1,19 +1,21 @@
 <?php
 namespace App\Helpers;
 
+use App\Services\ConfigService;
+
 class CustomRequest{
 
-    private $service_id = '';
-    private $secret_token = '';
-    private $base_url = 'https://api.nimbasms.com/v1';
+    private static $credentials = '';
+    private static $base_url = 'https://api.nimbasms.com/v1';
 
     public static function send_post($uri, $params) {
 
+        self::$credentials = ConfigService::getCredentials();
         $query = json_encode($params);
 
         $headers  = array(
             'Content-Type: application/json',
-            'Authorization: Basic '.base64_encode($this->service_id.':'.$this->secret_token),
+            'Authorization: Basic '.base64_encode(self::$credentials->service_id.':'.self::$credentials->secret_token),
             'Accept: application/json'
         );
 
@@ -21,7 +23,7 @@ class CustomRequest{
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_URL, $this->getFullUrl($uri));
+        curl_setopt($ch, CURLOPT_URL, self::getFullUrl($uri));
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
 
@@ -32,8 +34,8 @@ class CustomRequest{
     }
 
 
-    private function getFullUrl($uri){
+    private static function getFullUrl($uri){
         if(!$uri) return;
-        return $this->base_url.''.$uri;
+        return self::$base_url.''.$uri;
     }
 }
